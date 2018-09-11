@@ -1,0 +1,38 @@
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+        http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+	<!-- 1.开启SpringMvc注解模式 -->
+	<!-- 使用简化配置 **自动注册DefaultAnnotationHandlerMapping，AnnotationMethodHandlerMapping **提供一系列功能：数据绑定，数字和日期的Format @Number，@DateTimeFormat,xml、json的默认读写支持 -->
+	<mvc:annotation-driven />
+
+
+
+	<!-- 2.静态资源配置 -->
+
+
+	<!-- **加入对静态资源的处理：js、gif、png **允许使用"/"做整体映射 -->
+	<mvc:default-servlet-handler />
+
+	<!-- 3.配置json视图解析器 -->
+
+	<bean id="mappingJacksonHttpMessageConverter" class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter">
+		<property name="supportedMediaTypes">
+			<list>
+				<value>application/json;charset=UTF-8</value>
+			</list>
+		</property>
+		<property name="objectMapper">
+			<bean class="org.codehaus.jackson.map.ObjectMapper">
+				<property name="dateFormat">
+					<bean class="java.text.SimpleDateFormat">
+						<constructor-arg index="0" type="java.lang.String" value="yyyy-MM-dd HH:mm:ss" />
+					</bean>
+				</property>
+			</bean>
+		</property>
+	</bean>
+
+	<!-- 4.扫描web相关包 -->
+	<context:component-scan base-package="com.xhustore.web" />
+</beans>
