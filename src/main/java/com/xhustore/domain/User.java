@@ -14,11 +14,14 @@ public class User {
 
     private String wechatNumber;
 
+    private String headImage;
+
     public User() {
 
     }
 
-    public User(Long id, String phone, String password, String nickname, String qqNumber, String wechatNumber) {
+    public User(Long id, String phone, String password, String nickname, String qqNumber, String wechatNumber,
+            String headImage) {
         super();
         this.id = id;
         this.phone = phone;
@@ -26,6 +29,7 @@ public class User {
         this.nickname = nickname;
         this.qqNumber = qqNumber;
         this.wechatNumber = wechatNumber;
+        this.headImage = headImage;
     }
 
     public Long getId() {
@@ -74,6 +78,14 @@ public class User {
 
     public void setWechatNumber(String wechatNumber) {
         this.wechatNumber = wechatNumber;
+    }
+
+    public String getHeadImage() {
+        return headImage;
+    }
+
+    public void setHeadImage(String headImage) {
+        this.headImage = headImage;
     }
 
 }

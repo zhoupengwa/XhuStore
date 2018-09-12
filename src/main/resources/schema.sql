@@ -10,6 +10,7 @@ create table user(
     introduce varchar(200),
     qq_number char(13),
     wechat_number char(20),
+	head_image char(40),
     create_time timestamp not null default current_timestamp,
     update_time timestamp not null,
     is_deleted tinyint not null default 0,
@@ -28,6 +29,16 @@ create table goods(
     is_deleted tinyint not null default 0,
     primary key(id)
 )engine=InnoDB auto_increment=1000 default charset=utf8 comment '商品信息表';
+/* 商品图片表 */
+create table image(
+	id bigint not null auto_increment, 
+	goods_id bigint not null,
+	image char(40) not null,
+	create_time timestamp not null default current_timestamp,
+    update_time timestamp not null,
+    is_deleted tinyint not null default 0,
+    primary key(id)
+)engine=InnoDB auto_increment=1000 default charset=utf8 comment '商品图片表';
 /* 商品发布表 */
 create table ralease(
     id bigint not null auto_increment, 
@@ -64,3 +75,14 @@ create table orders(
     is_deleted tinyint not null default 0,
     primary key(id)
 )engine=InnoDB auto_increment=1000 default charset=utf8 comment '订单表';
+/* 管理员表 */
+create table admin(
+	id bigint not null auto_increment,
+    account char(20) not null default 'admin',
+    password char(20) not null default 'admin',
+	create_time timestamp not null default current_timestamp,
+    update_time timestamp not null,
+    is_deleted tinyint not null default 0,
+    primary key(id)
+
+)engine=InnoDB auto_increment=1000 default charset=utf8 comment '管理员表';
