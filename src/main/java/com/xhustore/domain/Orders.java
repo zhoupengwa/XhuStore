@@ -13,20 +13,6 @@ public class Orders {
     private String comment;
     private Boolean admire;
 
-    public Orders(Long id, Long goodsId, Long buyerId, Long sellerId, Integer state, Date starTime, Date finishTime,
-            String comment, Boolean admire) {
-        super();
-        this.id = id;
-        this.goodsId = goodsId;
-        this.buyerId = buyerId;
-        this.sellerId = sellerId;
-        this.state = state;
-        this.starTime = starTime;
-        this.finishTime = finishTime;
-        this.comment = comment;
-        this.admire = admire;
-    }
-
     public Long getId() {
         return id;
     }

@@ -14,5 +14,4 @@
 	<!-- 3. 配置基于注解的声明式事物，默认使用注解来管理事物行为 -->
 	<tx:annotation-driven transaction-manager="transactionManager" />
 
-
 </beans>

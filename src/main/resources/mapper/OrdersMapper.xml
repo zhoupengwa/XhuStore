@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.xhustore.dao.OrdersDao">
+	<sql id="Base_Column_List">
+		id, goods_id, buyer_id, seller_id, state, start_time, finish_time, comment, admire
+	</sql>
+	<insert id="insert">
+		insert into orders
+		(
+		goods_id,
+		buyer_id,
+		seller_id,
+		start_time
+		)
+		values
+		(
+		#{goodsId,jdbcType=BIGINT},
+		#{buyerId,jdbcType=BIGINT},
+		#{sellerId,jdbcType=BIGINT},
+		current_timestamp
+		)
+	</insert>
+
+	<delete id="delete" parameterType="java.lang.Long">
+		update orders set is_deleted=1,update_time=current_timestamp where id = #{id,jdbcType=BIGINT}
+	</delete>
+</mapper>

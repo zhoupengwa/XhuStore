@@ -1,11 +1,41 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE mapper
-        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 
 <mapper namespace="com.xhustore.dao.UserDao">
-	<insert id="insertUser" parameterType="User">
-		insert into user(phone,password,update_time) values(#{phone},#{password},'2018-09-11')
+	<sql id="Base_Column_List">
+		id, phone, password, nickname, introduce, qq_number, wechat_number, head_image
+	</sql>
+
+	<insert id="insert" parameterType="User">
+		insert into user
+		(
+		phone,
+		password
+		)
+		values
+		(
+		#{phone,jdbcType=CHAR},
+		#{password,jdbcType=CHAR}
+		)
 	</insert>
 
+	<update id="update" parameterType="User">
+		update user set
+		nickname = #{nickname,jdbcType=CHAR},
+		college = #{college,jdbcType=CHAR},
+		introduce = #{introduce,jdbcType=VARCHAR},
+		qq_number=#{qqNumber,jdbcType=CHAR},
+		wechat_number = #{wechatNumber,jdbcType=CHAR},
+		update_time = current_timestamp
+		where
+		id = #{id,jdbcType=BIGINT}
+	</update>
+
+	<update id="updateHeadImage">
+		update user set head_image=#{headImage},update_time=current_timestamp where id = #{id,jdbcType=BIGINT}
+	</update>
+
+	<update id="updatePassword">
+		update user set password=#{password},update_time=current_timestamp where id = #{id,jdbcType=BIGINT}
+	</update>
 </mapper>

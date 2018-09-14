@@ -10,27 +10,15 @@ public class User {
 
     private String nickname;
 
+    private String college;
+
+    private String introduce;
+
     private String qqNumber;
 
     private String wechatNumber;
 
     private String headImage;
-
-    public User() {
-
-    }
-
-    public User(Long id, String phone, String password, String nickname, String qqNumber, String wechatNumber,
-            String headImage) {
-        super();
-        this.id = id;
-        this.phone = phone;
-        this.password = password;
-        this.nickname = nickname;
-        this.qqNumber = qqNumber;
-        this.wechatNumber = wechatNumber;
-        this.headImage = headImage;
-    }
 
     public Long getId() {
         return id;
@@ -62,6 +50,22 @@ public class User {
 
     public void setNickname(String nickname) {
         this.nickname = nickname;
+    }
+
+    public String getCollege() {
+        return college;
+    }
+
+    public void setCollege(String college) {
+        this.college = college;
+    }
+
+    public String getIntroduce() {
+        return introduce;
+    }
+
+    public void setIntroduce(String introduce) {
+        this.introduce = introduce;
     }
 
     public String getQqNumber() {

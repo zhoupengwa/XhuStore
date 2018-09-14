@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xhustore.dao.ImageDao">
+	<sql id="Base_Column_List">
+		id, goods_id, image
+	</sql>
+	<insert id="insert" parameterType="Image">
+		insert into image
+		(
+		goods_id,
+		image
+		)
+		values
+		(
+		#{goodsId,jdbcType=BIGINT},
+		#{image,jdbcType=CHAR}
+		)
+	</insert>
+	<delete id="delete" parameterType="java.lang.Long">
+		update image set is_deleted=1,update_time=current_timestamp where id = #{id,jdbcType=BIGINT}
+	</delete>
+</mapper>

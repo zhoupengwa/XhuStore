@@ -13,6 +13,10 @@ public class Goods {
 
     private Integer amount;
 
+    public Goods() {
+
+    }
+
     public Goods(Long id, String name, String type, Float price, String depict, Integer amount) {
         super();
         this.id = id;
