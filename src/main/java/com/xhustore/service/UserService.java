@@ -1,5 +1,14 @@
 package com.xhustore.service;
 
+import com.xhustore.domain.User;
+import com.xhustore.vo.UserListAllVO;
+import com.xhustore.vo.UserLoginVO;
+import com.xhustore.vo.UserLookInfoVO;
+import com.xhustore.vo.UserRegisterVO;
+import com.xhustore.vo.UserUpdateHeadImageVO;
+import com.xhustore.vo.UserUpdateInfoVO;
+import com.xhustore.vo.UserUpdatePasswordVO;
+
 public interface UserService {
     /**
      * 获取验证码
@@ -9,32 +18,32 @@ public interface UserService {
     /**
      * 注册
      */
-    void register(String phone, String password, String verifyCode);
+    UserRegisterVO register(String phone, String password, String verifyCode);
 
     /**
      * 登录
      */
-    boolean login(String phone, String password);
+    UserLoginVO login(String phone, String password);
 
     /**
      * 修改个人信息
      */
-    void updateInfo();
+    UserUpdateInfoVO updateInfo(User user);
 
     /**
      * 设置头像
      */
-    void updateHeadImage();
+    UserUpdateHeadImageVO updateHeadImage(Long id, String headImage);
 
     /**
-     * 查看个人信息
+     * 查看个人信息(是否包含联系方式)
      */
-    void lookInfo();
+    UserLookInfoVO lookInfo(Long id, boolean includeContactInfo);
 
     /**
      * 修改密码
      */
-    void updatePassword();
+    UserUpdatePasswordVO updatePassword(Long id, String originPassword, String newPassword);
 
     /**
      * 重置密码
@@ -44,7 +53,12 @@ public interface UserService {
     /**
      * 查看所有用户
      */
-    void listAllUser();
+    UserListAllVO listAllUser();
+
+    /**
+     * 分页查看所有用户
+     */
+    UserListAllVO listAllUserByPage(int pageSize, int currentPage);
 
     /**
      * 冻结用户

@@ -25,6 +25,7 @@
 		<property name="configLocation" value="classpath:mybatis/SqlMapConfig.xml" />
 		<!-- 域对象包扫描 -->
 		<property name="typeAliasesPackage" value="com.xhustore.domain" />
+		<!-- 扫描mapper -->
 		<property name="mapperLocations" value="classpath:mapper/*.xml" />
 	</bean>
 	<!-- 4.配置dao扫描，动态实现dao接口，并注入到spring容器中 -->

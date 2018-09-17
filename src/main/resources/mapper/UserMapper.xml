@@ -3,7 +3,7 @@
 
 <mapper namespace="com.xhustore.dao.UserDao">
 	<sql id="Base_Column_List">
-		id, phone, password, nickname, introduce, qq_number, wechat_number, head_image
+		id, phone, nickname, introduce, qq_number, wechat_number, head_image
 	</sql>
 
 	<insert id="insert" parameterType="User">
@@ -38,4 +38,33 @@
 	<update id="updatePassword">
 		update user set password=#{password},update_time=current_timestamp where id = #{id,jdbcType=BIGINT}
 	</update>
+
+	<!-- 根据id查询密码 -->
+	<select id="queryPasswordById" resultType="java.lang.String">
+		select password from user where id=#{id} and is_deleted=0
+	</select>
+
+	<!-- 根据phone和密码查询用户 -->
+	<select id="queryByPhoneAndPassword" resultType="com.xhustore.dto.UserDTO">
+		select
+		<include refid="Base_Column_List"></include>
+		from user where phone=#{phone} and password=#{password} and is_deleted=0
+	</select>
+
+	<!-- 根据id查询用户 -->
+	<select id="queryById" resultType="com.xhustore.dto.UserDTO">
+		select id,nickname, introduce,
+		<if test="includeContactInfo==true">
+			phone,qq_number, wechat_number,
+		</if>
+		head_image from user where id=#{id}
+	</select>
+
+	<!-- 查询素有用户 -->
+	<select id="queryAll" resultType="com.xhustore.dto.UserDTO">
+		select
+		<include refid="Base_Column_List"></include>
+		from user where is_deleted=0;
+	</select>
+
 </mapper>

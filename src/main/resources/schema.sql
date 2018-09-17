@@ -17,6 +17,8 @@ create table user(
     is_deleted tinyint not null default 0,
     primary key(id)
 )engine=InnoDB auto_increment=1000 default charset=utf8 comment '用户表';
+insert into user(phone,password) values('18483638748','123456');
+insert into user(phone,password) values('18483638749','123456');
 /* 商品信息表 */
 create table goods(
     id bigint not null auto_increment, 
