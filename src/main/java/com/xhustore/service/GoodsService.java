@@ -1,35 +1,45 @@
 package com.xhustore.service;
 
+import com.xhustore.domain.Goods;
+import com.xhustore.vo.GoodsDeleteVO;
+import com.xhustore.vo.GoodsListAllVO;
+import com.xhustore.vo.GoodsListReleaseVO;
+import com.xhustore.vo.GoodsLookInfoVO;
+import com.xhustore.vo.GoodsPurchaseVO;
+import com.xhustore.vo.GoodsReleaseVO;
+import com.xhustore.vo.GoodsSearchVO;
+import com.xhustore.vo.GoodsUpdateVO;
+
 public interface GoodsService {
     /**
      * 发布商品
      */
-    void releaseGoods();
+    GoodsReleaseVO releaseGoods(Goods goods);
 
     /**
      * 下架商品（冻结商品）
      */
-    void deleteGoods();
+    GoodsDeleteVO deleteGoods();
 
     /**
      * 更改已上架商品信息
      */
-    void updateGoods();
+    GoodsUpdateVO updateGoods();
 
     /**
      * 列出已上架商品
      */
-    void listReleaseGoods();
+    GoodsListReleaseVO listReleaseGoods();
 
     /**
      * 查看商品详细信息
      */
-    void lookGoodsInfo();
+    GoodsLookInfoVO lookGoodsInfo();
 
     /**
      * 搜索商品-名称、价格、类别、发布时间【五个条件可随意组合】
      */
-    void searchGoods();
+    GoodsSearchVO searchGoods();
 
     /**
      * 分页搜索商品-名称、价格、类别、发布时间【五个条件可随意组合】
@@ -39,12 +49,12 @@ public interface GoodsService {
     /**
      * 购买商品
      */
-    void purchaseGoods();
+    GoodsPurchaseVO purchaseGoods();
 
     /**
      * 查看所有商品
      */
-    void listAllGoods();
+    GoodsListAllVO listAllGoods();
 
     /**
      * 分页查看所有商品

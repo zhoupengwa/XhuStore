@@ -5,7 +5,8 @@
 	<sql id="Base_Column_List">
 		id, name, type, price, depict, amount
 	</sql>
-	<insert id="insert" parameterType="Goods">
+
+	<insert id="insert" parameterType="Goods" useGeneratedKeys="true" keyProperty="id">
 		insert into goods
 		(
 		name,
@@ -23,17 +24,25 @@
 		#{amount,jdbcType=INTEGER}
 		)
 	</insert>
+
 	<update id="update" parameterType="Goods">
 		update goods set
 		name = #{name,jdbcType=VARCHAR},
 		type = #{type,jdbcType=CHAR},
 		price = #{price,jdbcType=REAL},
 		depict = #{depict,jdbcType=VARCHAR},
-		amount = #{amount,jdbcType=INTEGER},
+		amount =
+		#{amount,jdbcType=INTEGER},
 		update_time=current_timestamp
 		where
-		id = #{id,jdbcType=BIGINT}
+		id = #{id,jdbcType=BIGINT} and is_deleted=0
 	</update>
+
+	<select id="queryById" resultType="Goods">
+		select
+		<include refid="Base_Column_List"></include>
+		from goods where id=#{id} and is_deleted=0
+	</select>
 
 
 </mapper>

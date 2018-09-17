@@ -2,8 +2,6 @@ package com.xhustore.service.impl;
 
 import static org.junit.Assert.*;
 
-import java.util.List;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,12 +9,14 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.xhustore.domain.User;
-import com.xhustore.dto.UserDTO;
 import com.xhustore.service.UserService;
+import com.xhustore.vo.UserDeleteVO;
 import com.xhustore.vo.UserListAllVO;
 import com.xhustore.vo.UserLoginVO;
+import com.xhustore.vo.UserLookInfoVO;
 import com.xhustore.vo.UserUpdateHeadImageVO;
 import com.xhustore.vo.UserUpdateInfoVO;
+import com.xhustore.vo.UserUpdatePasswordVO;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration({ "classpath:spring/spring-dao.xml", "classpath:spring/spring-service.xml" })
@@ -36,8 +36,8 @@ public class UserServiceImplTest {
 
     @Test
     public void testLogin() {
-        String phone = "18483638748";
-        String password = "12345";
+        String phone = "18483638749";
+        String password = "123456";
         UserLoginVO loginExecutionDTO = userService.login(phone, password);
         System.out.println(loginExecutionDTO);
     }
@@ -65,12 +65,15 @@ public class UserServiceImplTest {
 
     @Test
     public void testLookInfo() {
-        fail("Not yet implemented");
+        Long id = 1005L;
+        UserLookInfoVO vo = userService.lookInfo(id, true);
+        System.out.println(vo);
     }
 
     @Test
     public void testUpdatePassword() {
-        fail("Not yet implemented");
+       UserUpdatePasswordVO vo=userService.updatePassword(1000L, "123456", "123456");
+       System.out.println(vo);
     }
 
     @Test
@@ -86,7 +89,9 @@ public class UserServiceImplTest {
 
     @Test
     public void testDeleteUser() {
-        fail("Not yet implemented");
+        Long id = 1000L;
+        UserDeleteVO vo = userService.deleteUser(id);
+        System.out.println(vo);
     }
 
 }

@@ -11,4 +11,8 @@ public interface GoodsDao {
 
     // 删除商品
     int delete(Long id);
+
+    // 根据id查询
+    Goods queryById(Long id);
+
 }

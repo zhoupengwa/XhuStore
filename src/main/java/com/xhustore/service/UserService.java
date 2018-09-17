@@ -1,6 +1,7 @@
 package com.xhustore.service;
 
 import com.xhustore.domain.User;
+import com.xhustore.vo.UserDeleteVO;
 import com.xhustore.vo.UserListAllVO;
 import com.xhustore.vo.UserLoginVO;
 import com.xhustore.vo.UserLookInfoVO;
@@ -63,6 +64,6 @@ public interface UserService {
     /**
      * 冻结用户
      */
-    void deleteUser();
+    UserDeleteVO deleteUser(Long id);
 
 }

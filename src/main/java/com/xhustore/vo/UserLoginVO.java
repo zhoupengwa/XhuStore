@@ -5,7 +5,7 @@ import com.xhustore.enums.UserServiceExecutionEnum;
 
 public class UserLoginVO {
     private UserServiceExecutionEnum loginExecutionEnum;
-    private UserDTO userDTO;
+    private UserDTO userDTO;//登录后的用户信息
 
     public UserLoginVO(UserServiceExecutionEnum loginExecutionEnum, UserDTO userDTO) {
         super();

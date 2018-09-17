@@ -20,26 +20,27 @@ public class GoodsDaoTest {
     @Test
     public void testInsert() {
         Goods goods = new Goods();
-        goods.setName("二手自行车");
+        goods.setName("二手电筒");
         goods.setDepict("刚买不到一个月，自己用不上，低价抛售");
         goods.setAmount(1);
         goods.setType(GoodsTypeEnum.CLOSES.getName());
         goods.setPrice(99.9F);
         int count = goodsDao.insert(goods);
-        assert count == 1;
+        System.out.println(count);
+        //assert count == 1;
     }
 
     @Test
     public void testUpdate() {
-      Goods goods=new Goods();
-      goods.setId(1000L);
-      goods.setName("二手强劲自行车");
-      goods.setType("二手车哦");
-      goods.setPrice(99.8F);
-      goods.setDepict("买了刚一个月");
-      goods.setAmount(1);
-      int count = goodsDao.update(goods);
-      assert count == 1;
+        Goods goods = new Goods();
+        goods.setId(1000L);
+        goods.setName("二手强劲自行车");
+        goods.setType("二手车哦");
+        goods.setPrice(99.8F);
+        goods.setDepict("买了刚一个月");
+        goods.setAmount(1);
+        int count = goodsDao.update(goods);
+        assert count == 1;
     }
 
     @Test
@@ -47,4 +48,10 @@ public class GoodsDaoTest {
         fail("Not yet implemented");
     }
 
+    @Test
+    public void testQueryById() {
+        Long id = 1000L;
+        Goods goods = goodsDao.queryById(id);
+        System.out.println(goods);
+    }
 }

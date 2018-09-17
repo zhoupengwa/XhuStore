@@ -28,15 +28,19 @@
 		wechat_number = #{wechatNumber,jdbcType=CHAR},
 		update_time = current_timestamp
 		where
-		id = #{id,jdbcType=BIGINT}
+		id = #{id,jdbcType=BIGINT} and is_deleted=0
 	</update>
 
 	<update id="updateHeadImage">
-		update user set head_image=#{headImage},update_time=current_timestamp where id = #{id,jdbcType=BIGINT}
+		update user set head_image=#{headImage},update_time=current_timestamp where id = #{id,jdbcType=BIGINT} and is_deleted=0
 	</update>
 
 	<update id="updatePassword">
-		update user set password=#{password},update_time=current_timestamp where id = #{id,jdbcType=BIGINT}
+		update user set password=#{password},update_time=current_timestamp where id = #{id,jdbcType=BIGINT} and is_deleted=0
+	</update>
+
+	<update id="delete">
+		update user set is_deleted=1,update_time=current_timestamp where id=#{id} and is_deleted=0
 	</update>
 
 	<!-- 根据id查询密码 -->
@@ -57,7 +61,7 @@
 		<if test="includeContactInfo==true">
 			phone,qq_number, wechat_number,
 		</if>
-		head_image from user where id=#{id}
+		head_image from user where id=#{id} and is_deleted=0
 	</select>
 
 	<!-- 查询素有用户 -->

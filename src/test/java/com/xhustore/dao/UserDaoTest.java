@@ -29,7 +29,7 @@ public class UserDaoTest {
     @Test
     public void testUpdateUser() {
         User user = new User();
-        user.setId(1000L);
+        user.setId(1001L);
         user.setNickname("周周");
         user.setCollege("汽车与交通学院");
         user.setQqNumber("982352881");
@@ -83,5 +83,12 @@ public class UserDaoTest {
     public void testQueryAll() {
         List<UserDTO> userDTOList = userDao.queryAll();
         System.out.println(userDTOList);
+    }
+
+    @Test
+    public void testDelete() {
+        Long id = 1001L;
+        int count = userDao.delete(id);
+        System.out.println(count);
     }
 }

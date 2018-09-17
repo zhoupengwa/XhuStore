@@ -10,6 +10,7 @@ import com.xhustore.domain.User;
 import com.xhustore.dto.UserDTO;
 import com.xhustore.enums.UserServiceExecutionEnum;
 import com.xhustore.service.UserService;
+import com.xhustore.vo.UserDeleteVO;
 import com.xhustore.vo.UserListAllVO;
 import com.xhustore.vo.UserLoginVO;
 import com.xhustore.vo.UserLookInfoVO;
@@ -72,12 +73,15 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserUpdatePasswordVO updatePassword(Long id, String originPassword, String newPassword) {
         String password = userDao.queryPasswordById(id);
-        if (originPassword.equals(password)) {
-            int count = userDao.updatePassword(id, newPassword);
-            if (count == 1) {
-                return new UserUpdatePasswordVO(UserServiceExecutionEnum.UPDATE_SUCCESS);
+        if (password != null) {
+            if (originPassword.equals(password)) {
+                int count = userDao.updatePassword(id, newPassword);
+                if (count == 1) {
+                    return new UserUpdatePasswordVO(UserServiceExecutionEnum.UPDATE_SUCCESS);
+                }
+            } else {
+                return new UserUpdatePasswordVO(UserServiceExecutionEnum.UPDATE_PASSWORD_FAILED);
             }
-            return new UserUpdatePasswordVO(UserServiceExecutionEnum.UPDATE_FAILED);
         }
         return new UserUpdatePasswordVO(UserServiceExecutionEnum.UPDATE_FAILED);
     }
@@ -102,9 +106,12 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void deleteUser() {
-        // TODO Auto-generated method stub
-
+    public UserDeleteVO deleteUser(Long id) {
+        int count = userDao.delete(id);
+        if (count == 1) {
+            return new UserDeleteVO(UserServiceExecutionEnum.DELETE_SUCCESS);
+        }
+        return new UserDeleteVO(UserServiceExecutionEnum.DELETE_FAILED);
     }
 
 }

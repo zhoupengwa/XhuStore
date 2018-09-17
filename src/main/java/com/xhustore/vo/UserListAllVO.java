@@ -8,7 +8,7 @@ import com.xhustore.enums.UserServiceExecutionEnum;
 public class UserListAllVO {
 
     private UserServiceExecutionEnum userServiceExecutionEnum;
-    private List<UserDTO> userDTOList;
+    private List<UserDTO> userDTOList;//查询出的用户列表
 
     public UserListAllVO(UserServiceExecutionEnum userServiceExecutionEnum, List<UserDTO> userDTOList) {
         super();
