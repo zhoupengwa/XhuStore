@@ -59,7 +59,6 @@ public class GoodsServiceImpl implements GoodsService {
     @Transactional
     @Override
     public GoodsDeleteVO deleteGoods(Long userId, Long goodsId) {
-
         Long releasesId = releasesDao.queryReleasesId(userId, goodsId);
         if (releasesId != null) { // 检查权限
             int count = goodsDao.delete(goodsId);
@@ -107,9 +106,12 @@ public class GoodsServiceImpl implements GoodsService {
     }
 
     @Override
-    public GoodsImageUpdateVO deleteImage(Long id, Long imageId) {
-        // 检查权限
-        int count = imageDao.delete(imageId, id);
+    public GoodsImageUpdateVO deleteImage(Long userId,Long goodsId, Long imageId) {
+        Long releasesId = releasesDao.queryReleasesId(userId, goodsId);
+        if (releasesId == null) { // 检查权限
+            return new GoodsImageUpdateVO(GoodsExecutionServiceEnum.IMAGE_DELETE_FAILED);
+        }
+        int count = imageDao.delete(imageId, goodsId);
         if (count == 1) {
             return new GoodsImageUpdateVO(GoodsExecutionServiceEnum.IMAGE_DELETE_SUCESS);
         }

@@ -40,7 +40,7 @@ public interface GoodsService {
      * 为商品删除图片
      * 
      */
-    GoodsImageUpdateVO deleteImage(Long id,Long imageId);
+    GoodsImageUpdateVO deleteImage(Long userId,Long goodsId, Long imageId);
 
     /**
      * 列出已上架商品

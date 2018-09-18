@@ -23,4 +23,8 @@
 		update releases set is_deleted=1,update_time=current_timestamp where id=#{id} and is_deleted=0
 	</update>
 
+	<!-- 查询已发布的商品 -->
+	<select id="listReleasesGoods" resultType="com.xhustore.dto.ReleasesGoodsDTO" parameterType="java.lang.Long">
+		select 
+	</select>
 </mapper>

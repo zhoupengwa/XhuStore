@@ -72,7 +72,11 @@ public class GoodsServiceImplTest {
 
     @Test
     public void testDeleteImage() {
-
+        Long userId = 1000L;
+        Long goodsId = 1001L;
+        Long imageId = 1002L;
+        GoodsImageUpdateVO vo = goodsService.deleteImage(userId, goodsId, imageId);
+        System.out.println(vo);
     }
 
     @Test
