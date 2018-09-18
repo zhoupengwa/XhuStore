@@ -24,6 +24,7 @@
 		#{amount,jdbcType=INTEGER}
 		)
 	</insert>
+	
 
 	<update id="update" parameterType="Goods">
 		update goods set
@@ -44,5 +45,8 @@
 		from goods where id=#{id} and is_deleted=0
 	</select>
 
+	<update id="delete" parameterType="java.lang.Long">
+		update goods set is_deleted=1,update_time=current_timestamp where id=#{id} and is_deleted=0
+	</update>
 
 </mapper>

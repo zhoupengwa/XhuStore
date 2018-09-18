@@ -43,7 +43,7 @@ create table image(
     primary key(id)
 )engine=InnoDB auto_increment=1000 default charset=utf8 comment '商品图片表';
 /* 商品发布表 */
-create table ralease(
+create table releases(
     id bigint not null auto_increment, 
     user_id bigint not null,
     goods_id bigint not null,

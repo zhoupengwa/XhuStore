@@ -1,7 +1,5 @@
 package com.xhustore.dao;
 
-import static org.junit.Assert.*;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,13 +25,13 @@ public class GoodsDaoTest {
         goods.setPrice(99.9F);
         int count = goodsDao.insert(goods);
         System.out.println(count);
-        //assert count == 1;
+        // assert count == 1;
     }
 
     @Test
     public void testUpdate() {
         Goods goods = new Goods();
-        goods.setId(1000L);
+        goods.setId(1007L);
         goods.setName("二手强劲自行车");
         goods.setType("二手车哦");
         goods.setPrice(99.8F);
@@ -45,7 +43,9 @@ public class GoodsDaoTest {
 
     @Test
     public void testDelete() {
-        fail("Not yet implemented");
+        Long id = 1004L;
+        int count = goodsDao.delete(id);
+        System.out.println(count);
     }
 
     @Test

@@ -64,7 +64,7 @@
 		head_image from user where id=#{id} and is_deleted=0
 	</select>
 
-	<!-- 查询素有用户 -->
+	<!-- 查询所有用户 -->
 	<select id="queryAll" resultType="com.xhustore.dto.UserDTO">
 		select
 		<include refid="Base_Column_List"></include>

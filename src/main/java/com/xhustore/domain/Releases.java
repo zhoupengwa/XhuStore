@@ -1,13 +1,11 @@
 package com.xhustore.domain;
 
-public class Release {
+public class Releases {
     private Long id;
     private Long userId;
     private Long goodsId;
 
-    public Release(Long id, Long userId, Long goodsId) {
-        super();
-        this.id = id;
+    public Releases(Long userId, Long goodsId) {
         this.userId = userId;
         this.goodsId = goodsId;
     }

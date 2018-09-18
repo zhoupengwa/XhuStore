@@ -3,13 +3,21 @@ package com.xhustore.domain;
 
 public class Image {
     private long id;
-    
+
     private long goodsId;
-    
+
     private String image;
 
+    public Image() {
+    }
+
+    public Image(long goodsId, String image) {
+        this.goodsId = goodsId;
+        this.image = image;
+    }
+
     public long getId() {
-        return id; 
+        return id;
     }
 
     public void setId(long id) {

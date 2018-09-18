@@ -1,7 +1,11 @@
 package com.xhustore.service;
 
+import java.util.List;
+
 import com.xhustore.domain.Goods;
+import com.xhustore.domain.Image;
 import com.xhustore.vo.GoodsDeleteVO;
+import com.xhustore.vo.GoodsImageUpdateVO;
 import com.xhustore.vo.GoodsListAllVO;
 import com.xhustore.vo.GoodsListReleaseVO;
 import com.xhustore.vo.GoodsLookInfoVO;
@@ -14,17 +18,29 @@ public interface GoodsService {
     /**
      * 发布商品
      */
-    GoodsReleaseVO releaseGoods(Goods goods);
+    GoodsReleaseVO releaseGoods(Long userId,Goods goods, List<Image> imageList);
 
     /**
-     * 下架商品（冻结商品）
+     * 下架商品
      */
-    GoodsDeleteVO deleteGoods();
+    GoodsDeleteVO deleteGoods(Long userId,Long goodsId);
 
     /**
      * 更改已上架商品信息
      */
-    GoodsUpdateVO updateGoods();
+    GoodsUpdateVO updateGoods(Long userId,Goods goods);
+
+    /**
+     * 
+     * 为商品添加图片
+     */
+    GoodsImageUpdateVO addImage(Long userId,Long goodsId, String imagePath);
+
+    /**
+     * 为商品删除图片
+     * 
+     */
+    GoodsImageUpdateVO deleteImage(Long id,Long imageId);
 
     /**
      * 列出已上架商品
@@ -59,6 +75,6 @@ public interface GoodsService {
     /**
      * 分页查看所有商品
      */
-    void listAllGoodsByPage(int pageSize,int currentPage);
+    void listAllGoodsByPage(int pageSize, int currentPage);
 
 }

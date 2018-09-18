@@ -1,22 +1,22 @@
 package com.xhustore.vo;
 
-import com.xhustore.enums.GoodsServiceEnum;
+import com.xhustore.enums.GoodsExecutionServiceEnum;
 
 public class GoodsReleaseVO {
-    private GoodsServiceEnum goodsServiceEnum;
+    private GoodsExecutionServiceEnum goodsServiceEnum;
     private Long id;//发布后的商品ID
 
-    public GoodsReleaseVO(GoodsServiceEnum goodsServiceEnum, Long id) {
+    public GoodsReleaseVO(GoodsExecutionServiceEnum goodsServiceEnum, Long id) {
         super();
         this.goodsServiceEnum = goodsServiceEnum;
         this.id = id;
     }
 
-    public GoodsServiceEnum getGoodsServiceEnum() {
+    public GoodsExecutionServiceEnum getGoodsServiceEnum() {
         return goodsServiceEnum;
     }
 
-    public void setGoodsServiceEnum(GoodsServiceEnum goodsServiceEnum) {
+    public void setGoodsServiceEnum(GoodsExecutionServiceEnum goodsServiceEnum) {
         this.goodsServiceEnum = goodsServiceEnum;
     }
 

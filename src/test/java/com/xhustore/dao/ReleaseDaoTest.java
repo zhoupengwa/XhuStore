@@ -6,36 +6,32 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import com.xhustore.domain.Image;
+import com.xhustore.domain.Releases;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration({ "classpath:spring/spring-dao.xml" })
-public class ImageDaoTest {
+public class ReleaseDaoTest {
     @Autowired
-    private ImageDao imageDao;
+    private ReleasesDao releaseDao;
 
     @Test
     public void testInsert() {
-        Image image = new Image();
-        image.setGoodsId(1000L);
-        image.setImage("2.jpg");
-        int count = imageDao.insert(image);
+        Releases release = new Releases(1000L, 1000L);
+        int count = releaseDao.insert(release);
         assert count == 1;
     }
 
     @Test
     public void testDelete() {
-        Long id = 1005L;
-        Long goodsId = 1009L;
-        int count = imageDao.delete(id, goodsId);
-        assert count == 1;
+        Long id = 1000L;
+        int count = releaseDao.delete(id);
+        System.out.println(count);
     }
 
     @Test
-    public void testCount() {
-        Long goodsId = 1009L;
-        Long count = imageDao.count(goodsId);
-        System.out.println(count);
+    public void testQueryReleasesId() {
+        Long id = releaseDao.queryReleasesId(1000L, 1001L);
+        System.out.println(id);
     }
 
 }

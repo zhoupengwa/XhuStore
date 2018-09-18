@@ -4,6 +4,7 @@
 	<sql id="Base_Column_List">
 		id, goods_id, image
 	</sql>
+
 	<insert id="insert" parameterType="Image">
 		insert into image
 		(
@@ -16,7 +17,13 @@
 		#{image,jdbcType=CHAR}
 		)
 	</insert>
+
 	<delete id="delete" parameterType="java.lang.Long">
-		update image set is_deleted=1,update_time=current_timestamp where id = #{id,jdbcType=BIGINT}
+		update image set is_deleted=1,update_time=current_timestamp where id = #{id,jdbcType=BIGINT} and goods_id=#{goodsId} and is_deleted=0
 	</delete>
+
+	<select id="count" parameterType="java.lang.Long" resultType="java.lang.Long">
+		select count(*) from image where goods_id=#{goodsId} and is_deleted=0
+	</select>
+
 </mapper>
