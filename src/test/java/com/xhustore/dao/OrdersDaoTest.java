@@ -31,4 +31,12 @@ public class OrdersDaoTest {
         fail("Not yet implemented");
     }
 
+    @Test
+    public void testQueryState() {
+        Long goodsId = 1000L;
+        Integer state = ordersDao.queryState(goodsId);
+        System.out.println(state);
+
+    }
+
 }

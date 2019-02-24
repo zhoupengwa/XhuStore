@@ -26,4 +26,8 @@
 		select count(*) from image where goods_id=#{goodsId} and is_deleted=0
 	</select>
 
+	<select id="queryFirstImage" resultType="java.lang.String" parameterType="java.lang.Long">
+		select image from image where goods_id=#{goodsId} and is_deleted=0 limit 1 offset 0
+	</select>
+
 </mapper>

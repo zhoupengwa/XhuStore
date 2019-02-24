@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Param;
 
 import com.xhustore.domain.Releases;
 import com.xhustore.dto.ReleasesGoodsDTO;
+import com.xhustore.dto.UserDTO;
 
 public interface ReleasesDao {
     // 插入发布信息
@@ -19,4 +20,7 @@ public interface ReleasesDao {
 
     // 查询
     List<ReleasesGoodsDTO> listReleasesGoods(Long userId);
+
+    // 根据商品ID查询发布者（卖家）信息
+    UserDTO queryUserByGoodsId(Long goodsId);
 }

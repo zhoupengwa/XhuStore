@@ -2,6 +2,17 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 
 <mapper namespace="com.xhustore.dao.ReleasesDao">
+	<resultMap id="ReleasesGoodsDTOMap" type="com.xhustore.dto.ReleasesGoodsDTO">
+		<id column="id" property="id" />
+		<association property="goods" javaType="com.xhustore.domain.Goods">
+			<id column="goods_id" property="id" />
+			<result column="name" property="name" />
+			<result column="type" property="type" />
+			<result column="price" property="price" />
+			<result column="amount" property="amount" />
+		</association>
+	</resultMap>
+
 	<insert id="insert" parameterType="Releases">
 		insert into releases
 		(
@@ -24,7 +35,23 @@
 	</update>
 
 	<!-- 查询已发布的商品 -->
-	<select id="listReleasesGoods" resultType="com.xhustore.dto.ReleasesGoodsDTO" parameterType="java.lang.Long">
-		select 
+	<select id="listReleasesGoods" resultMap="ReleasesGoodsDTOMap" parameterType="java.lang.Long">
+		select
+		r.id,
+		r.goods_id,
+		g.name,
+		g.type,
+		g.price,
+		g.amount,
+		i.image
+		from
+		releases r join goods g on r.goods_id=g.id
+		right join image i on r.goods_id=i.goods_id
+		where
+		r.user_id=#{uesrId} and r.is_deleted=0
+	</select>
+
+	<select id="queryUserByGoodsId" resultType="com.xhustore.dto.UserDTO" parameterType="java.lang.Long">
+		select id,nickname,college,introduce,head_image from user where id= (select user_id from releases where goods_id=#{goodsId} and is_deleted=0)
 	</select>
 </mapper>

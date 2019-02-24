@@ -11,6 +11,7 @@ import com.xhustore.vo.GoodsListReleaseVO;
 import com.xhustore.vo.GoodsLookInfoVO;
 import com.xhustore.vo.GoodsPurchaseVO;
 import com.xhustore.vo.GoodsReleaseVO;
+import com.xhustore.vo.GoodsSearchByPageVO;
 import com.xhustore.vo.GoodsSearchVO;
 import com.xhustore.vo.GoodsUpdateVO;
 
@@ -45,22 +46,23 @@ public interface GoodsService {
     /**
      * 列出已上架商品
      */
-    GoodsListReleaseVO listReleaseGoods();
+    GoodsListReleaseVO listReleaseGoods(Long userId);
 
     /**
      * 查看商品详细信息
      */
-    GoodsLookInfoVO lookGoodsInfo();
+    GoodsLookInfoVO lookGoodsInfo(Long goodsId);
 
     /**
-     * 搜索商品-名称、价格、类别、发布时间【五个条件可随意组合】
+     * 搜索商品-名称、价格、类别【可随意组合】
      */
-    GoodsSearchVO searchGoods();
+    GoodsSearchVO searchGoods(String name, String type,Float minPrice, Float maxPrice, Boolean orderByPriceDesc);
 
     /**
-     * 分页搜索商品-名称、价格、类别、发布时间【五个条件可随意组合】
+     * 分页搜索商品-名称、价格、类别【可随意组合】
+     * @param <T>
      */
-    void serachGoodsByPage(int pageSize, int currentPage);
+    <T> GoodsSearchByPageVO<T> serachGoodsByPage(String name, String type,Float minPrice, Float maxPrice, Boolean orderByPriceDesc,int pageSize, int currentPage);
 
     /**
      * 购买商品

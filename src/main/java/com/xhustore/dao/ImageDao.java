@@ -13,4 +13,7 @@ public interface ImageDao {
 
     // 统计图片数量
     Long count(Long goodsId);
+
+    // 查询物品的第一张图片
+    String queryFirstImage(Long goodsId);
 }

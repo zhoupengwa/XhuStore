@@ -15,7 +15,10 @@ public enum GoodsExecutionServiceEnum {
     IMAGE_ADD_FAILED(1,"图片添加失败"),
     IMAGE_ADD_AMOUNT_ERROR(2,"已超过最大允许数量"),
     IMAGE_DELETE_SUCESS(0,"图片删除成功"),
-    IMAGE_DELETE_FAILED(1,"图片删除失败")
+    IMAGE_DELETE_FAILED(1,"图片删除失败"),
+    
+    QUERY_SUCCESS(0,"查询成功"),
+    QUERY_FAILED(1,"查询失败")
     
     
     

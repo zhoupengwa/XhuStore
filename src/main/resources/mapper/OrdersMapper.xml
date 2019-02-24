@@ -23,6 +23,11 @@
 	</insert>
 
 	<delete id="delete" parameterType="java.lang.Long">
-		update orders set is_deleted=1,update_time=current_timestamp where id = #{id,jdbcType=BIGINT}
+		update orders set is_deleted=1,update_time=current_timestamp where id = #{id,jdbcType=BIGINT} and is_deleted=0
 	</delete>
+	
+	<select id="queryState" parameterType="java.lang.Long" resultType="java.lang.Integer">
+		select state from orders where goods_id=#{goodsId} and is_deleted=0
+	</select>
+
 </mapper>

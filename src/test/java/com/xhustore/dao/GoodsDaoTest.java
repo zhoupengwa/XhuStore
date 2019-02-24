@@ -1,5 +1,7 @@
 package com.xhustore.dao;
 
+import java.util.List;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,6 +9,8 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.xhustore.domain.Goods;
+import com.xhustore.dto.GoodsDTO;
+import com.xhustore.dto.GoodsDetailDTO;
 import com.xhustore.enums.GoodsTypeEnum;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -18,7 +22,7 @@ public class GoodsDaoTest {
     @Test
     public void testInsert() {
         Goods goods = new Goods();
-        goods.setName("二手电筒");
+        goods.setName("新款口红");
         goods.setDepict("刚买不到一个月，自己用不上，低价抛售");
         goods.setAmount(1);
         goods.setType(GoodsTypeEnum.CLOSES.getName());
@@ -51,7 +55,29 @@ public class GoodsDaoTest {
     @Test
     public void testQueryById() {
         Long id = 1000L;
-        Goods goods = goodsDao.queryById(id);
-        System.out.println(goods);
+        GoodsDetailDTO goodsDTO = goodsDao.queryById(id);
+        System.out.println(goodsDTO);
+    }
+
+    @Test
+    public void testListGoods() {
+        List<GoodsDTO> dtos = goodsDao.listGoods(null,"电子", null, null, null);
+        for (GoodsDTO dto : dtos) {
+            System.out.println(dto.toString());
+        }
+    }
+
+    @Test
+    public void testCount() {
+        Long countSum = goodsDao.count(null,"服", null, 200.5f);
+        System.out.println(countSum);
+    }
+
+    @Test
+    public void testListGoodsByPage() {
+        List<GoodsDTO> dtos = goodsDao.listGoodsByPage(null,"服", null, 200.5f, false, 2, 1);
+        for (GoodsDTO dto : dtos) {
+            System.out.println(dto.toString());
+        }
     }
 }

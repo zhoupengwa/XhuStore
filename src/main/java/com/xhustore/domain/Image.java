@@ -2,33 +2,33 @@
 package com.xhustore.domain;
 
 public class Image {
-    private long id;
+    private Long id;
 
-    private long goodsId;
+    private Long goodsId;
 
     private String image;
 
     public Image() {
     }
 
-    public Image(long goodsId, String image) {
+    public Image(Long goodsId, String image) {
         this.goodsId = goodsId;
         this.image = image;
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
-    public long getGoodsId() {
+    public Long getGoodsId() {
         return goodsId;
     }
 
-    public void setGoodsId(long goodsId) {
+    public void setGoodsId(Long goodsId) {
         this.goodsId = goodsId;
     }
 

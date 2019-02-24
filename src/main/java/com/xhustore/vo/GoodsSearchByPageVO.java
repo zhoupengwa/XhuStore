@@ -1,26 +1,24 @@
 package com.xhustore.vo;
 
-import java.util.List;
-
-import com.xhustore.dto.GoodsDTO;
+import com.xhustore.domain.PageBean;
 import com.xhustore.enums.GoodsExecutionServiceEnum;
 
-public class GoodsSearchVO {
+public class GoodsSearchByPageVO<T> {
     private GoodsExecutionServiceEnum goodsExecutionServiceEnum;
-    private List<GoodsDTO> goodsDTOList;
+    private PageBean<T> pageBean;
 
-    public GoodsSearchVO(GoodsExecutionServiceEnum goodsExecutionServiceEnum, List<GoodsDTO> goodsDTOList) {
+    public GoodsSearchByPageVO(GoodsExecutionServiceEnum goodsExecutionServiceEnum, PageBean<T> pageBean) {
         super();
         this.goodsExecutionServiceEnum = goodsExecutionServiceEnum;
-        this.goodsDTOList = goodsDTOList;
+        this.pageBean = pageBean;
     }
 
     public GoodsExecutionServiceEnum getGoodsExecutionServiceEnum() {
         return goodsExecutionServiceEnum;
     }
 
-    public List<GoodsDTO> getGoodsDTOList() {
-        return goodsDTOList;
+    public PageBean<T> getPageBean() {
+        return pageBean;
     }
 
 }

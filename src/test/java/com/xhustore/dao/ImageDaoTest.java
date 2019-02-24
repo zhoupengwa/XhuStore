@@ -38,4 +38,11 @@ public class ImageDaoTest {
         System.out.println(count);
     }
 
+    @Test
+    public void testQueryFirstImage() {
+        Long goodsId = 1090L;
+        String image = imageDao.queryFirstImage(goodsId);
+        System.out.println(image);
+    }
+
 }

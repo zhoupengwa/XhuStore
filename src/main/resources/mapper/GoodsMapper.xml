@@ -2,9 +2,23 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 
 <mapper namespace="com.xhustore.dao.GoodsDao">
+
 	<sql id="Base_Column_List">
 		id, name, type, price, depict, amount
 	</sql>
+
+	<resultMap id="GoodsDetailDTOMap" type="com.xhustore.dto.GoodsDetailDTO">
+		<id column="id" property="id" />
+		<result column="name" property="name" />
+		<result column="type" property="type" />
+		<result column="price" property="price" />
+		<result column="depict" property="depict" />
+		<result column="amount" property="amount" />
+		<collection property="imageList" ofType="com.xhustore.domain.Image">
+			<id column="image_id" property="id" />
+			<result column="image" property="image" />
+		</collection>
+	</resultMap>
 
 	<insert id="insert" parameterType="Goods" useGeneratedKeys="true" keyProperty="id">
 		insert into goods
@@ -24,7 +38,7 @@
 		#{amount,jdbcType=INTEGER}
 		)
 	</insert>
-	
+
 
 	<update id="update" parameterType="Goods">
 		update goods set
@@ -39,14 +53,128 @@
 		id = #{id,jdbcType=BIGINT} and is_deleted=0
 	</update>
 
-	<select id="queryById" resultType="Goods">
-		select
-		<include refid="Base_Column_List"></include>
-		from goods where id=#{id} and is_deleted=0
-	</select>
-
 	<update id="delete" parameterType="java.lang.Long">
 		update goods set is_deleted=1,update_time=current_timestamp where id=#{id} and is_deleted=0
 	</update>
+	
+	<!-- 查询商品详细信息 -->
+	<select id="queryById" resultMap="GoodsDetailDTOMap" parameterType="java.lang.Long">
+		select
+		g.*,
+		image.id image_id,
+		image.image
+		from
+		(select id, name, type, price, depict, amount from goods where id=#{goodsId} and
+		is_deleted=0) g,image
+		where
+		g.id=image.goods_id
+	</select>
 
+
+	<!-- 列出商品（搜索） -->
+	<select id="listGoods" resultType="com.xhustore.dto.GoodsDTO">
+		select
+		a.id,
+		a.name,
+		a.type,
+		a.price,
+		a.depict,
+		a.amount,
+		b.image first_image
+		from
+		goods a left join(select goods_id,image from image group by goods_id) b
+		on a.id=b.goods_id
+		<where>
+			a.is_deleted=0
+			<if test="name!=null">
+				and a.name like concat('%',#{name},'%')
+			</if>
+			<if test="type!=null">
+				and a.type = #{type}
+			</if>
+			<if test="minPrice!=null">
+				and a.price>=#{minPrice}
+			</if>
+			<if test="maxPrice!=null">
+				and a.price<![CDATA[<=]]>#{maxPrice}
+			</if>
+		</where>
+		<if test="orderByPriceDesc!=null">
+			<if test="orderByPriceDesc==true">
+				order by price desc
+			</if>
+			<if test="orderByPriceDesc==false">
+				order by price asc
+			</if>
+		</if>
+	</select>
+
+	<!-- 统计总数，带条件 -->
+	<select id="count" resultType="java.lang.Long">
+		select
+		count(*)
+		from
+		goods
+		<where>
+			is_deleted=0
+			<if test="name!=null">
+				and name like concat('%',#{name},'%')
+			</if>
+			<if test="type!=null">
+				and type = #{type}
+			</if>
+			<if test="minPrice!=null">
+				and price>=#{minPrice}
+			</if>
+			<if test="maxPrice!=null">
+				and price<![CDATA[<=]]>#{maxPrice}
+			</if>
+		</where>
+
+	</select>
+	<!-- 索引优化,分页搜索 -->
+	<select id="listGoodsByPage" resultType="com.xhustore.dto.GoodsDTO">
+		select c.* from (
+		select
+		a.id id,
+		a.name name,
+		a.type type,
+		a.price price,
+		a.depict depict,
+		a.amount amount,
+		b.image first_image
+		from
+		goods a left join(select goods_id,image from image group by goods_id) b
+		on
+		a.id=b.goods_id
+		) c,
+		(
+		select id from goods
+		<where>
+			is_deleted=0
+			<if test="name!=null">
+				and name like concat('%',#{name},'%')
+			</if>
+			<if test="type!=null">
+				and type = #{type}
+			</if>
+			<if test="minPrice!=null">
+				and price>=#{minPrice}
+			</if>
+			<if test="maxPrice!=null">
+				and price<![CDATA[<=]]>#{maxPrice}
+			</if>
+		</where>
+		limit #{pageSize} offset #{startIndex}
+		) d
+		where c.id=d.id
+		<if test="orderByPriceDesc!=null">
+			<if test="orderByPriceDesc==true">
+				order by price desc
+			</if>
+			<if test="orderByPriceDesc==false">
+				order by price asc
+			</if>
+		</if>
+	</select>
 </mapper>

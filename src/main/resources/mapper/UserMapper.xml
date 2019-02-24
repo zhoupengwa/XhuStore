@@ -70,5 +70,5 @@
 		<include refid="Base_Column_List"></include>
 		from user where is_deleted=0;
 	</select>
-
+	
 </mapper>

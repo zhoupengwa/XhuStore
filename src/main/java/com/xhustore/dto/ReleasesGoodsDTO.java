@@ -3,26 +3,31 @@ package com.xhustore.dto;
 import com.xhustore.domain.Goods;
 
 public class ReleasesGoodsDTO {
-    private Long releasesId;
+    private Long id;
     private Goods goods;
     private String firstImage;
 
-    public ReleasesGoodsDTO(Long releasesId, Goods goods, String firstImage) {
-        this.releasesId = releasesId;
-        this.goods = goods;
-        this.firstImage = firstImage;
+    public Long getId() {
+        return id;
     }
 
-    public Long getReleasesId() {
-        return releasesId;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public Goods getGoods() {
         return goods;
     }
 
+    public void setGoods(Goods goods) {
+        this.goods = goods;
+    }
+
     public String getFirstImage() {
         return firstImage;
     }
 
+    public void setFirstImage(String firstImage) {
+        this.firstImage = firstImage;
+    }
 }
